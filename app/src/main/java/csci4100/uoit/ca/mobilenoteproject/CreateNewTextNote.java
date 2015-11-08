@@ -2,6 +2,7 @@ package csci4100.uoit.ca.mobilenoteproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
@@ -26,14 +27,16 @@ import java.util.Date;
 
 public class CreateNewTextNote extends AppCompatActivity {
 
+    static final int SELECT_PICTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 3;
-    static final int REQUEST_IMAGE_CAPTURE = 4;
+    static final int REQUEST_IMAGE_CAPTURE = 6;
     private boolean imageAdded = false;
     private Bitmap image;
 
-    Intent returnNewNoteIntent;
+    private Intent returnNewNoteIntent;
 
-    String mCurrentPhotoPath;
+    private String mCurrentPhotoPath;
+    private String selectedImagePath;
 
 
     @Override
@@ -108,6 +111,11 @@ public class CreateNewTextNote extends AppCompatActivity {
             Bitmap takenPicture = (Bitmap) extras.get("data");
             image = takenPicture;
             imageAdded = true;
+        } else if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                Uri selectedImageUri = data.getData();
+                selectedImagePath = getPath(selectedImageUri);
+            }
         }
     }
 
@@ -116,6 +124,25 @@ public class CreateNewTextNote extends AppCompatActivity {
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
+    }
+
+    public String getPath(Uri uri) {
+        // just some safety built in
+        if( uri == null ) {
+            return null;
+        }
+        // try to retrieve the image from the media store first
+        // this will only work for images selected from gallery
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        if( cursor != null ){
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        // this is our fallback here
+        return uri.getPath();
     }
 
     public void dispatchTakePictureIntent(View btn) {
@@ -154,6 +181,13 @@ public class CreateNewTextNote extends AppCompatActivity {
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
         return image;
+    }
+
+    public void dispatchSelectPictureIntent(View btn) {
+        Intent selectImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        selectImageIntent.setType("image/*");
+        startActivityForResult(Intent.createChooser(selectImageIntent, "Select Picture"), SELECT_PICTURE);
+
     }
 
 

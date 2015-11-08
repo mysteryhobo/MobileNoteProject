@@ -42,7 +42,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_gravity="right"
                 android:text="Gallery"
-                android:src="@drawable/galleryicon"/>
+                android:src="@drawable/galleryicon"
+                android:onClick="dispatchSelectPictureIntent"/>
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -54,7 +55,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_gravity="right"
                 android:text="Take Picture"
-                android:src="@drawable/cameraicon"/>
+                android:src="@drawable/cameraicon"
+                android:onClick="dispatchTakePictureIntent"/>
 
             <ImageButton
                 android:id="@+id/pdf"
