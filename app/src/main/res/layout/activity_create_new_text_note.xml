@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_SubmitNoteText_CreatNewTextNotePage"
-        android:onClick="submitText"/>
+        android:onClick="submitNote"/>
 
     <Button
         android:layout_width="wrap_content"

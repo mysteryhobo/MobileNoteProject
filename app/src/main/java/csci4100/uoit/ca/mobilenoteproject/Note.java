@@ -14,7 +14,25 @@ public class Note {
     private boolean hasPicture = false;
     private boolean hasVideo = false;
     private boolean hasPDF = false;
+    private boolean hasdescription = false;
     private Uri imageUri;
+
+
+    public Note(String name, String description, Date date){
+        this.name = name;
+        this.description = description;
+        this.hasdescription = true;
+        this.dateCreated = date;
+    }
+
+    public Note(String name, String description, Date date, Uri image){
+        this.name = name;
+        this.description = description;
+        this.hasdescription = true;
+        this.dateCreated = date;
+        this.imageUri = image;
+        this.hasPicture = true;
+    }
 
 
     public String getName() {

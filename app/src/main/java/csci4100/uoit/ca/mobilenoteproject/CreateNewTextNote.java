@@ -23,6 +23,9 @@ public class CreateNewTextNote extends AppCompatActivity {
 
     static final int REQUEST_TAKE_PHOTO = 3;
     static final int REQUEST_IMAGE_CAPTURE = 4;
+    private boolean imageAdded = false;
+    private Bitmap image;
+
     Intent returnNewNoteIntent;
 
     String mCurrentPhotoPath;
@@ -56,7 +59,7 @@ public class CreateNewTextNote extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void submitText (View btn) {
+    public void submitNote (View btn) {
         returnNewNoteIntent = new Intent();
         EditText noteText = (EditText) findViewById(R.id.EditText_CreateNewNotePage);
         returnNewNoteIntent.putExtra("noteTextResult", noteText.getText().toString());
@@ -74,9 +77,9 @@ public class CreateNewTextNote extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            Uri imageUri = getImageUri(this, imageBitmap);
-            returnNewNoteIntent.putExtra("imageUri", imageUri.toString());
+            Bitmap takenPicture = (Bitmap) extras.get("data");
+            image = takenPicture;
+            imageAdded = true;
         }
     }
 
