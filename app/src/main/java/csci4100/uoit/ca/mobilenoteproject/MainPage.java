@@ -2,12 +2,16 @@ package csci4100.uoit.ca.mobilenoteproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Iterator;
@@ -50,6 +54,11 @@ public class MainPage extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 TextView newNoteText = (TextView) findViewById(R.id.textView_mainPage);
                 newNoteText.setText(data.getStringExtra("noteTextResult"));
+
+                Uri imageUri = data.getParcelableExtra("imageUri");
+                ImageView noteImg = (ImageView) findViewById(R.id.img_testNoteImage_mainPage);
+                noteImg.setImageURI(imageUri);
+//                noteImg.setImageBitmap((Bitmap) data.getParcelableExtra("BitmapImage"));
             }
         }
     }

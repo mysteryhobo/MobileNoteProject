@@ -1,6 +1,8 @@
 package csci4100.uoit.ca.mobilenoteproject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -19,6 +22,9 @@ import java.util.Date;
 public class CreateNewTextNote extends AppCompatActivity {
 
     static final int REQUEST_TAKE_PHOTO = 3;
+    static final int REQUEST_IMAGE_CAPTURE = 4;
+    Intent returnNewNoteIntent;
+
     String mCurrentPhotoPath;
 
 
@@ -51,10 +57,10 @@ public class CreateNewTextNote extends AppCompatActivity {
     }
 
     public void submitText (View btn) {
-        Intent returnTextIntent = new Intent();
+        returnNewNoteIntent = new Intent();
         EditText noteText = (EditText) findViewById(R.id.EditText_CreateNewNotePage);
-        returnTextIntent.putExtra("noteTextResult", noteText.getText().toString());
-        setResult(RESULT_OK, returnTextIntent);
+        returnNewNoteIntent.putExtra("noteTextResult", noteText.getText().toString());
+        setResult(RESULT_OK, returnNewNoteIntent);
         finish();
     }
 
@@ -64,7 +70,24 @@ public class CreateNewTextNote extends AppCompatActivity {
         finish();
     }
 
-    private void dispatchTakePictureIntent() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Uri imageUri = getImageUri(this, imageBitmap);
+            returnNewNoteIntent.putExtra("imageUri", imageUri.toString());
+        }
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public void dispatchTakePictureIntent(View btn) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
