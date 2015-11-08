@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/EditText_CreateNewNotePage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:hint="@string/editTxt_NewTExtNoteHint_NewTextNotePage"/>
 
     <TextView
@@ -28,7 +28,13 @@
         android:maxWidth="50dp"
         android:scaleType="fitXY"
         android:layout_marginRight="5dp"
-        android:layout_gravity="right"/>
+        android:layout_gravity="right"
+        android:src="@drawable/attachicon"
+        android:id="@+id/openpopup"
+        android:onClick="onClick"
+        />
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

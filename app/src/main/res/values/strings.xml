@@ -9,4 +9,5 @@
     <string name="btn_SubmitNoteText_CreatNewTextNotePage">Submit</string>
     <string name="btn_CancelNewNote_CreatNewTextNotePage">Cancel</string>
     <string name="addPicture">Add Pic</string>
+    <string name="title_activity_attach_popup">AttachPopup</string>
 </resources>
