@@ -8,4 +8,5 @@
     <string name="editTxt_NewTExtNoteHint_NewTextNotePage">Enter new note text here</string>
     <string name="btn_SubmitNoteText_CreatNewTextNotePage">Submit</string>
     <string name="btn_CancelNewNote_CreatNewTextNotePage">Cancel</string>
+    <string name="addPicture">Add Pic</string>
 </resources>

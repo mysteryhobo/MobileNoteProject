@@ -13,6 +13,27 @@
         android:layout_height="300dp"
         android:hint="@string/editTxt_NewTExtNoteHint_NewTextNotePage"/>
 
+    <TextView
+        android:id="@+id/lblAttach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attach:"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="40dp"
+        android:maxWidth="50dp"
+        android:scaleType="fitXY"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="right"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addPicture"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
