@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -10,15 +10,19 @@
     <EditText
         android:id="@+id/EditText_CreateNewNotePage"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:hint="@string/editTxt_NewTExtNoteHint_NewTextNotePage"/>
+        android:layout_height="150dp"
+        android:hint="@string/editTxt_NewTExtNoteHint_NewTextNotePage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="70dp" />
 
     <TextView
         android:id="@+id/lblAttach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attach:"
-        />
+        android:layout_above="@+id/openpopup"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -32,25 +36,35 @@
         android:src="@drawable/attachicon"
         android:id="@+id/openpopup"
         android:onClick="onClick"
-        />
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true" />
 
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/addPicture"
-        android:onClick="dispatchTakePictureIntent"/>
+        android:onClick="dispatchTakePictureIntent"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_SubmitNoteText_CreatNewTextNotePage"
-        android:onClick="submitNote"/>
+        android:onClick="submitNote"
+        android:id="@+id/button3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_CancelNewNote_CreatNewTextNotePage"
-        android:onClick="cancelNewNote"/>
+        android:onClick="cancelNewNote"
+        android:id="@+id/button"
+        android:layout_below="@+id/openpopup"
+        android:layout_alignParentStart="true" />
 
-</LinearLayout>
+</RelativeLayout>
